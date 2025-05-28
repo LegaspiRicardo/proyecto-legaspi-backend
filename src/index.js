@@ -9,7 +9,9 @@ app.use(cors());
 app.use(express.json());
 
 
-
+//Rutas
+const taskRoutes = require('./routes/taskRoutes');
+app.use('/api/tasks', taskRoutes);
 
 
 //Inicializar el servidor
