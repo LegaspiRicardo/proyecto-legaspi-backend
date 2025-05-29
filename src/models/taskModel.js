@@ -1,8 +1,8 @@
-const pool = requiere('../config/db');
+const pool = require('../config/db');
 
 const getAllTasks = async () => {
     const [rows] = await pool.query('SELECT * FROM tasks');
-    return rows [0];
+    return rows;
 };
 
 
@@ -14,7 +14,7 @@ const getTaskById = async (id) => {
 
 const createTask = async (task) => {
     const{ title, description } = task;
-    const [result] = await pool.query('INSERT INTO tasks (title, description) VALUES (?,?)', [title, description]);
+    const [result] = await pool.query('INSERT INTO tasks (title, description) VALUES (?, ?)', [title, description]);
     return {id: result.insertId, title, description};
 };
 

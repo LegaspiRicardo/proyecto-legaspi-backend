@@ -10,7 +10,7 @@ app.use(express.json());
 
 
 //Rutas
-const taskRoutes = require('./routes/taskRoutes');
+const taskRoutes = require('./routes/taskRoute');
 app.use('/api/tasks', taskRoutes);
 
 

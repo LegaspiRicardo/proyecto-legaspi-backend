@@ -1,22 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const taskConstroller = require('../controllers/taskController');
+const taskController = require('../controllers/taskController');
 
 
 //Obtener todas las tareas
-router.get('/', taskConstroller.getTasks);
+router.get('/', taskController.getTasks);
 
 //Obener una tarea por ID
-router.get('/:id', taskConstroller.getTask);
+router.get('/:id', taskController.getTask);
 
 //Crear una nueva tarea
-router.post('/', taskConstroller.createTask);
+router.post('/', taskController.createTask);
 
 //Actualizar una tarea por ID
-router.put('/:id', taskConstroller.updateTask );
+router.put('/:id', taskController.updateTask );
 
 //Eliminar una tarea por ID
-router.delete('/:id', taskConstroller.deleteTask );
+router.delete('/:id', taskController.deleteTask );
 
 
 module.exports = router;
