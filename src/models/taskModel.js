@@ -13,9 +13,9 @@ const getTaskById = async (id) => {
 
 
 const createTask = async (task) => {
-    const{ title, description } = task;
-    const [result] = await pool.query('INSERT INTO tasks (title, description) VALUES (?, ?)', [title, description]);
-    return {id: result.insertId, title, description};
+    const{ title, description, status } = task;
+    const [result] = await pool.query('INSERT INTO tasks (title, description, status) VALUES (?, ?, ?)', [title, description, status]);
+    return {id: result.insertId, title, description, status};
 };
 
 
