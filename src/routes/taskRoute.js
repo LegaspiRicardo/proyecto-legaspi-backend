@@ -1,22 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const taskController = require('../controllers/taskController');
+const {getAllTasks, addTask, updateTask, deleteTask} = require('../controllers/taskController');
+const authenticate = require('../middlewares/authenticate');
+
 
 
 //Obtener todas las tareas
-router.get('/', taskController.getTasks);
-
-//Obener una tarea por ID
-router.get('/:id', taskController.getTask);
+router.get('/', authenticate, getAllTasks);
 
 //Crear una nueva tarea
-router.post('/', taskController.createTask);
+router.post('/', authenticate, addTask);
 
 //Actualizar una tarea por ID
-router.put('/:id', taskController.updateTask );
+router.put('/:id', authenticate, updateTask );
 
 //Eliminar una tarea por ID
-router.delete('/:id', taskController.deleteTask );
+router.delete('/:id', authenticate, deleteTask );
 
 
 module.exports = router;
