@@ -1,6 +1,6 @@
 const taskModel = require ('../models/taskModel');
 
-const getTasks = async (req, res) => {
+const getAllTasks = async (req, res) => {
     try{
         const tasks = await taskModel.getAllTasksByUserId(req.res.id);
         res.json(tasks);
@@ -80,7 +80,7 @@ const deleteTask = async (req, res) => {
 
 
 module.exports = {
-    getTasks,
+    getAllTasks,
     getTask,
     addTask,
     updateTask,

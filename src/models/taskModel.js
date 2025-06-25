@@ -1,39 +1,43 @@
 const pool = require('../config/db');
 
-const getAllTasks = async () => {
-    const [rows] = await pool.query('SELECT * FROM tasks');
-    return rows;
+const getAllTasksByUserId = async (userId) => {
+    try{
+        const [rows] = await pool.query('SELECT * FROM tasks WHERE userId = ?', [userId]);
+        return rows;
+    } catch(error){
+        console.error('Error al obtener las tareas:', error.message);
+        throw error;
+    }
 };
 
 
-const getTaskById = async (id) => {
-    const [rows] = await pool.query('SELECT * FROM tasks WHERE id = ?' , [id]);
+const getTaskByIdAndUserId = async (taskId, userId) => {
+    const [rows] = await pool.query('SELECT * FROM tasks WHERE id = ? AND user_id = ?' , [taskId, userId]);
     return rows [0];
 };
 
 
 const createTask = async (task) => {
-    const{ title, description, status } = task;
-    const [result] = await pool.query('INSERT INTO tasks (title, description, status) VALUES (?, ?, ?)', [title, description, status]);
-    return {id: result.insertId, title, description, status};
+    const{ title, status, user_id } = task;
+    const [result] = await pool.query('INSERT INTO tasks (title, status, user_id) VALUES (?, ?, ?)', [title, status, user_id]);
+    return {id: result.insertId, ...task};
 };
 
 
-const updateTask = async (id, task) => {
-    const{ title, description } = task;
-    await pool.query('UPDATE tasks SET title = ?, description = ? WHERE id = ?', [title, description, id]);
-    return {id, title, description};
+const updateTask = async (taskId, task) => {
+    const{ title, status } = task;
+    await pool.query('UPDATE tasks SET title = ?, status = ? WHERE id = ?', [title, status, taskId]);
+    return {id, taskId, title, status};
 };
 
 
-const deleteTask = async (id) => {
-    await pool.query('DELETE FROM tasks WHERE id = ?', [id]);
-    return {id};
+const deleteTask = async (taskId) => {
+    await pool.query('DELETE FROM tasks WHERE id = ?', [taskId]);
 };
 
 module.exports ={
-    getAllTasks,
-    getTaskById,
+    getAllTasksByUserId,
+    getTaskByIdAndUserId,
     createTask,
     updateTask,
     deleteTask

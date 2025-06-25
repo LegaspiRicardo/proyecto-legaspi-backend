@@ -5,7 +5,13 @@ require('dotenv').config();
 const app = express();
 
 //Middleware
-app.use(cors());
+app.use(cors(
+    {
+        origin: 'http://localhost:5173',               
+        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        credentiales: true  //Permite enviar cookies y encabezados de autenticazión
+    }
+));
 app.use(express.json());
 
 
@@ -18,6 +24,9 @@ app.use('/api/tasks', taskRoutes);
 const userRoutes = require('./routes/userRoute');
 app.use('/api/users', userRoutes);
 
+//Inicializar el servidor
+const authRoutes = require('./routes/authRoutes');
+app.use('/api/auth', authRoutes);
 
 //Inicializar el servidor
 const PORT = process.env.PORT || 5000;
