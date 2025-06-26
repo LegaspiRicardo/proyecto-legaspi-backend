@@ -28,5 +28,5 @@ const login = async (req, res) => {
 }
 
 module.exports = {
-    Login
+    login
 };
