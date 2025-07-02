@@ -1,3 +1,7 @@
+npm install express cors body-parser mysql2 dotenv
+
+npm install --save-dev nodemon
+
 npm install jsonwebtoken dotenv
 
 npm install bcrypt
